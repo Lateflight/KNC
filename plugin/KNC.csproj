@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <!-- Where the game lives. Change only this line if it moves. -->
+    <KSPDir>C:\Program Files (x86)\Steam\steamapps\common\KSP_DEV</KSPDir>
+  </PropertyGroup>
+
+  <!-- Use the game's code to build, but don't copy it (Private = false). -->
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(KSPDir)\KSP_x64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(KSPDir)\KSP_x64_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(KSPDir)\KSP_x64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- After every build, copy KNC.dll into the game. -->
+  <Target Name="CopyToGame" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(KSPDir)\GameData\KNC\Plugins" />
+  </Target>
+
+</Project>
